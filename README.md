@@ -12,7 +12,7 @@ The Computer Activity dataset is a collection of computer systems activity measu
 5: Features 		    21
 6: Missing values 	No
 
-7: Header.
+7: Header
 
 @relation compactiv
 
@@ -23,9 +23,13 @@ The Computer Activity dataset is a collection of computer systems activity measu
 @attribute Scall real[109.0,12493.0]
 
 @attribute Sread real[6.0,5318.0]
+
 @attribute Swrite real[7.0,5456.0]
+
 @attribute Fork real[0.0,20.120001]
+
 @attribute Exec real[0.0,59.560001]
+
 @attribute Rchar real[278.0,2526649.0]
 @attribute Wchar real[1498.0,1801623.0]
 @attribute Pgout real[0.0,81.440002]
