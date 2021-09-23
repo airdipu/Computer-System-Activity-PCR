@@ -6,18 +6,22 @@ Compactiv dataset
 1: Description.
 The Computer Activity dataset is a collection of computer systems activity measures. The data was collected from a Sun Sparcstation 20/712 with 128 Mbytes of memory running in a multi-user university department. The task is to predict de variable usr, the portion of time that cpus run in user mode.
 
-2: Type.			      Regression
-3: Origin.			    Real world
-4: Instances.		    8192
-5: Features.		    21
-6: Missing values.	No
+2: Type 			      Regression
+3: Origin 			    Real world
+4: Instances 		    8192
+5: Features 		    21
+6: Missing values 	No
 
 7: Header.
 
 @relation compactiv
+
 @attribute Lread real[0.0,1845.0]
+
 @attribute Lwrite real[0.0,575.0]
+
 @attribute Scall real[109.0,12493.0]
+
 @attribute Sread real[6.0,5318.0]
 @attribute Swrite real[7.0,5456.0]
 @attribute Fork real[0.0,20.120001]
