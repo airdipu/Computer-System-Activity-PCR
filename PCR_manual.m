@@ -1,14 +1,17 @@
 dataset = readtable('compactiv.dat');     % Read the .dat formate as a table
-data = table2array(dataset);              % Changing data table to array
+data1 = table2array(dataset);             % Changing data table to array
+data = zscore(data1);
+idx = find(data(:,22)<-4.0);              % Outliers identify
+data(idx,:) = [];
 
-X = data(:, 1:21);                        % Computer systems activity
-Y = data(:, 22);                          % Usr data
+x = data(:, 1:21);                        % Computer systems activity
+y = data(:, 22);                          % Usr data
 TF = ismissing(data);                     % checking the missing data
 tot = sum(TF);
 tot;                                      % If missing the sum >0
-x = zscore(X);                            % Standarised system activity
-y = zscore(Y);                            % Standarised Usr data
-plot(X);                                  % Checking data center
+%x = zscore(X);                            % Standarised system activity
+%y = zscore(Y);                            % Standarised Usr data
+plot(x);                                  % Checking data center
 [n, p] = size(x); 
 
 % apply PCA
