@@ -20,7 +20,7 @@ ylabel('Explained Variance in x')
 rsquaredPCR = 0;
 i = 0;
 
-while rsquaredPCR <0.70
+while rsquaredPCR <0.72
     i = i+1;
     betaPCR = regress(y, PCAScores(:,1:i));
     % Transform Beta PCs into Beta Variables
