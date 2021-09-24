@@ -1,16 +1,20 @@
 dataset = readtable('compactiv.dat');     % Read the .dat formate as a table
-data1 = table2array(dataset);             % Changing data table to array
-data = zscore(data1);
-idx = find(data(:,22)<-4.0);              % Outliers identify
+data = table2array(dataset);              % Changing data table to array
+TF = ismissing(data);                     % checking the missing data
+tot = sum(TF);                            % If missing the sum >0
+tot; 
+X = data(:, 1:21);                        % Original Computer systems activity
+Y = data(:, 22);                          % Original Usr data
+
+data = zscore(data);                      % Standardisation of data
+
+% Outliers identify and deleting
+idx = find(data(:,22)<-4.0);
 data(idx,:) = [];
 
 x = data(:, 1:21);                        % Computer systems activity
 y = data(:, 22);                          % Usr data
-TF = ismissing(data);                     % checking the missing data
-tot = sum(TF);
-tot;                                      % If missing the sum >0
-%x = zscore(X);                            % Standarised system activity
-%y = zscore(Y);                            % Standarised Usr data
+
 plot(x);                                  % Checking data center
 [n, p] = size(x); 
 
@@ -38,7 +42,7 @@ ylabel('Fitted Response');
 
 % Calculation
 TSS = sum(y.^2);
-RSS = sum((y-yfitPCR).^2);
+RSS = sum((y - yfitPCR).^2);
 rsquaredPCR = 1- (RSS/TSS);
 
 
