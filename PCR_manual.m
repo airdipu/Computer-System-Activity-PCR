@@ -28,3 +28,4 @@ figure;
 plot(yc, yfitPCR, 'bo');
 xlabel('Observed Response');
 ylabel('Fitted Response');
+
