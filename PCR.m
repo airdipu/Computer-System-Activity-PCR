@@ -4,6 +4,11 @@ plot(data);                               % Checking data center
 TF = ismissing(data);                     % checking the missing data
 tot = sum(TF);
 tot;                                      % If missing the sum >0
+
+% Outliers identify and deleting
+idx = find(data(:,22)<-4.0);
+data(idx,:) = [];
+
 x = data(:, 1:21);                        % Computer systems activity
 y = data(:, 22);                          % Usr data
 [n, p] = size(x);
@@ -13,7 +18,7 @@ y = data(:, 22);                          % Usr data
 rsquaredPCR = 0;
 i = 0;
 
-while rsquaredPCR <0.70
+while rsquaredPCR <0.90
     i = i+1;
     betaPCR = regress(y, PCAScores(:,1:i));
     % Transform Beta PCs into Beta Variables
