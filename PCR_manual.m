@@ -15,6 +15,20 @@ data(idx,:) = [];
 x = data(:, 1:21);                        % Computer systems activity
 y = data(:, 22);                          % Usr data
 
+
+% Dividing Training and Test datasets
+cv1 = cvpartition(size(x,1),'HoldOut',0.3);
+idx1 = cv1.test;
+xTrain = x(~idx1,:);
+xTest  = x(idx1,:);
+
+cv2 = cvpartition(size(y,1),'HoldOut',0.3);
+idx2 = cv2.test;
+yTrain = y(~idx2,:);
+yTest  = y(idx2,:);
+
+
+
 plot(x);                                  % Checking data center
 [n, p] = size(x); 
 
@@ -31,9 +45,9 @@ betaPCR = regress(y, PCAScores(:,1:9));
 
 % Transform B's from PCs to Beta coefficient for actual variable
 betaPCR = PCALoadings(:,1:9)*betaPCR;
-betaPCR = [mean(y) - mean(x)*betaPCR; betaPCR];
+betaPCR = [mean(y) - mean(X)*betaPCR; betaPCR];
 
-yfitPCR = [ones(n, 1) x]*betaPCR;
+yfitPCR = [ones(n, 1) X]*betaPCR;
 
 figure;
 plot(y, yfitPCR, 'bo');
