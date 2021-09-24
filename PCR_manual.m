@@ -12,10 +12,10 @@ plot(X);                                  % Checking data center
 [n, p] = size(x); 
 
 % apply PCA
-[PCALoadings, PCAScores, EigenVals, PCAVar] = pca(x, 'Economy', false);
+[PCALoadings, PCAScores, EigenVals, PCAVar, Explained] = pca(x, 'Economy', false);
 
 figure;
-plot(1:20, 100*cumsum(PCAVar(1:20))/sum(PCAVar(1:20)));
+plot(1:10, 100*cumsum(PCAVar(1:10))/sum(PCAVar(1:10)));
 xlabel('Number of Principal Component')
 ylabel('Explained Variance in x')
 
@@ -32,9 +32,6 @@ figure;
 plot(y, yfitPCR, 'bo');
 xlabel('Observed Response');
 ylabel('Fitted Response');
-
-
-
 
 % Calculation
 TSS = sum(y.^2);
