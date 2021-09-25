@@ -17,10 +17,10 @@ y = data(:, 22);                          % Usr data
 
 % Dividing data as Training and Testing
 
-cv1 = cvpartition(size(x,1),'HoldOut',0.3);
+cv1 = cvpartition(size(x,1),'HoldOut',0.3);  
 idx1 = cv1.test;
-xTrain = x(~idx2,:);
-xTest  = x(idx2,:);
+xTrain = x(~idx1,:);
+xTest  = x(idx1,:);
 
 cv2 = cvpartition(size(y,1),'HoldOut',0.3);
 idx2 = cv2.test;
