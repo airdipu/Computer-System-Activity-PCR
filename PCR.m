@@ -45,7 +45,7 @@ ylabel("Estimated Mean Squared Prediction Error");
 
 
 figure;
-title("Mean Squared Error");
+title("Calculated R2 Value");
 plot(1:3, rsquaredPCR, 'b-o');
 xlabel("Number of components");
 ylabel("R2 value (in %)");
