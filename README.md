@@ -13,7 +13,7 @@ Type 			      Regression    ||    Origin 			    Real_world     ||   Instances 		
 
 Header:
 
-||  @relation compactiv   ||
+@relation compactiv
 
 
                       @attribute Lread real[0.0,1845.0]     ||    @attribute Lwrite real[0.0,575.0]      ||    @attribute Scall real[109.0,12493.0]
