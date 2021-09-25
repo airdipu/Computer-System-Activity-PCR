@@ -45,9 +45,9 @@ betaPCR = regress(y, PCAScores(:,1:9));
 
 % Transform B's from PCs to Beta coefficient for actual variable
 betaPCR = PCALoadings(:,1:9)*betaPCR;
-betaPCR = [mean(y) - mean(X)*betaPCR; betaPCR];
+betaPCR = [mean(y) - mean(x)*betaPCR; betaPCR];
 
-yfitPCR = [ones(n, 1) X]*betaPCR;
+yfitPCR = [ones(n, 1) x]*betaPCR;
 
 figure;
 plot(y, yfitPCR, 'bo');
