@@ -15,25 +15,11 @@ data(idx,:) = [];
 x = data(:, 1:21);                        % Computer systems activity
 y = data(:, 22);                          % Usr data
 
-
-% Dividing Training and Test datasets
-cv1 = cvpartition(size(x,1),'HoldOut',0.3);
-idx1 = cv1.test;
-xTrain = x(~idx1,:);
-xTest  = x(idx1,:);
-
-cv2 = cvpartition(size(y,1),'HoldOut',0.3);
-idx2 = cv2.test;
-yTrain = y(~idx2,:);
-yTest  = y(idx2,:);
-
-
-
 plot(x);                                  % Checking data center
-[n, p] = size(x); 
+[n1, p1] = size(x); 
 
 % apply PCA
-[PCALoadings, PCAScores, EigenVals, PCAVar, Explained] = pca(x, 'Economy', false);
+[PCALoadings, PCAScores, EigenVals, PCAVar, Explained] = pca(xTrain, 'Economy', false);
 
 figure;
 plot(1:10, 100*cumsum(PCAVar(1:10))/sum(PCAVar(1:10)));
@@ -41,22 +27,22 @@ xlabel('Number of Principal Component')
 ylabel('Explained Variance in x')
 
 % Get regression factors for each Principal Component
-betaPCR = regress(y, PCAScores(:,1:9));
+betaPCR = regress(yTrain, PCAScores(:,1:9));
 
 % Transform B's from PCs to Beta coefficient for actual variable
 betaPCR = PCALoadings(:,1:9)*betaPCR;
-betaPCR = [mean(y) - mean(x)*betaPCR; betaPCR];
+betaPCR = [mean(yTest) - mean(xTest)*betaPCR; betaPCR];
 
-yfitPCR = [ones(n, 1) x]*betaPCR;
+yfitPCR = [ones(n, 1) xTest]*betaPCR;
 
 figure;
-plot(y, yfitPCR, 'bo');
+plot(yTest, yfitPCR, 'bo');
 xlabel('Observed Response');
 ylabel('Fitted Response');
 
 % Calculation
-TSS = sum(y.^2);
-RSS = sum((y - yfitPCR).^2);
+TSS = sum(yTest.^2);
+RSS = sum((yTest - yfitPCR).^2);
 rsquaredPCR = 1- (RSS/TSS);
 
 
