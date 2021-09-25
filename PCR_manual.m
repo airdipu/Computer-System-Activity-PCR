@@ -36,7 +36,7 @@ betaPCR = [mean(y) - mean(x)*betaPCR; betaPCR];
 yfitPCR = [ones(n, 1) x]*betaPCR;
 
 figure;
-plot(yTest, yfitPCR, 'bo');
+plot(y, yfitPCR, 'bo');
 xlabel('Observed Response');
 ylabel('Fitted Response');
 
