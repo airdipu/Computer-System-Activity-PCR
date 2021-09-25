@@ -40,16 +40,16 @@ xlabel('Number of Principal Component')
 ylabel('Explained Variance in x')
 
 % Get regression factors for each Principal Component
-betaPCR = regress(yTrain, PCAScores(:,1:9));
+betaPCR = regress(yTrain, PCAScores(:,1:9));    
 
 % Transform B's from PCs to Beta coefficient for actual variable
 betaPCR = PCALoadings(:,1:9)*betaPCR;
-betaPCR = [mean(yTest) - mean(xTest)*betaPCR; betaPCR];
+betaPCR = [mean(yTrain) - mean(xTrain)*betaPCR; betaPCR];
 
-yfitPCR = [ones(n, 1) xTest]*betaPCR;
+yfitPCR = [ones(n, 1) xTest]*betaPCR;           % For Test data
 
 figure;
-plot(yTrain, yfitPCR, 'bo');
+plot(yTest, yfitPCR, 'bo');
 xlabel('Observed Response');
 ylabel('Fitted Response');
 
