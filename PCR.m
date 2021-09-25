@@ -48,4 +48,5 @@ figure;
 title("Calculated R2 Value");
 plot(1:3, rsquaredPCR, 'b-o');
 xlabel("Number of components");
-ylabel("R2 value (in %)");
+ylabel("R2 value");
+
