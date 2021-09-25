@@ -46,6 +46,6 @@ ylabel("Estimated Mean Squared Prediction Error");
 
 figure;
 title("Mean Squared Error");
-plot(0:10, PCRmsep, 'b-o');
+plot(1:3, rsquaredPCR, 'b-o');
 xlabel("Number of components");
-ylabel("Estimated Mean Squared Prediction Error");
+ylabel("R2 value (in %)");
