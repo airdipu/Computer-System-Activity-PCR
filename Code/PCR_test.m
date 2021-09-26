@@ -12,23 +12,24 @@ data = zscore(data);                      % Standardisation of data
 idx = find(data(:,22)<-4.0);
 data(idx,:) = [];
 
-x = data(:, 1:21);                        % Computer systems activity
-y = data(:, 22);                          % Usr data
-
 % Dividing data as Training and Testing
 
-cv1 = cvpartition(size(x,1),'HoldOut',0.3);  
+cv1 = cvpartition(size(data,1),'HoldOut',0.3);  
 idx1 = cv1.test;
-xTrain = x(~idx1,:);
-xTest  = x(idx1,:);
-
-cv2 = cvpartition(size(y,1),'HoldOut',0.3);
-idx2 = cv2.test;
-yTrain = y(~idx2,:);
-yTest  = y(idx2,:);
+Train = data(~idx1,:);
+Test  = data(idx1,:);
 
 
-plot(x);                                  % Checking data center
+xTrain = Train(:, 1:21);                        % Computer systems activity
+yTrain = Train(:, 22);                          % Usr data
+
+
+xTest = Test(:, 1:21);                        % Computer systems activity
+yTest = Test(:, 22);                          % Usr data
+
+
+
+plot(xTrain);                                  % Checking data center
 [n, p] = size(xTest); 
 
 % apply PCA
