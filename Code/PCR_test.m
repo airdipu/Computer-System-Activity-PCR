@@ -45,7 +45,7 @@ betaPCR = regress(yTrain, PCAScores(:,1:9));
 
 % Transform B's from PCs to Beta coefficient for actual variable
 betaPCR = PCALoadings(:,1:9)*betaPCR;
-betaPCR = [mean(yTest) - mean(xTest)*betaPCR; betaPCR];
+betaPCR = [mean(yTrain) - mean(xTrain)*betaPCR; betaPCR];
 
 yfitPCR = [ones(n, 1) xTest]*betaPCR;           % For Test data
 
