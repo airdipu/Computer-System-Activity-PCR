@@ -42,6 +42,25 @@ Rsquared1 = 1 - RSS1/TSS1;
 % Comparison of regression made PCR and PLS
 
 % Compute PCR
+[PCALoadings, PCAScores, PCAVar] = pca(X, 'Economy', false);
+betaPCR = regress(y, PCAScores(:, 1:9));
+
+% Transform Beta PCs -> Beta Variables
+betaPCR = PCALoadings(:,1:9)*betaPCR;
+betaPCR = [mean(y) - mean(X)*betaPCR; betaPCR];
+
+% Ploting the Explained Variance
+figure;
+a = plot(1:9, 100*cumsum(PCAVar(1:9))/sum(PCAVar(1:9)), 'b');
+hold on
+b = plot(1:9, 100*cumsum(PCTVAR1(1,:))/sum(PCTVAR1(1,:)), 'r');
+c = plot(1:9, 100*cumsum(PCTVAR1(2,:))/sum(PCTVAR1(2,:)), 'k');
+xlabel('Number of Components')
+ylabel('Explained Variance')
+legend([a, b, c], {'PCR: Explained Variance in X', 'PLS: Explained Variance in X', 'PLS: Explained Variance in y'});
+
+
+
 
 
 
