@@ -39,7 +39,9 @@ RSS1 = sum((y-yfit1).^2);
 Rsquared1 = 1 - RSS1/TSS1;
 
 
+% Comparison of regression made PCR and PLS
 
+% Compute PCR
 
 
 
