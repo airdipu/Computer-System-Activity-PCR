@@ -32,11 +32,11 @@ figure;
 plot(0:9, MSE1(2,:));
 
 % fitting regression
-yfit1 = [ones(size(X,1),1) X]*beta1;
+yfitPLS = [ones(size(X,1),1) X]*beta1;
 
-TSS1 = sum((y-mean(y)).^2);
-RSS1 = sum((y-yfit1).^2);
-Rsquared1 = 1 - RSS1/TSS1;
+TSS = sum((y-mean(y)).^2);
+RSSPLS = sum((y-yfitPLS).^2);
+RsquaredPLS = 1 - RSSPLS/TSS;
 
 
 % Comparison of regression made PCR and PLS
@@ -62,19 +62,24 @@ legend([a, b, c], {'PCR: Explained Variance in X', 'PLS: Explained Variance in X
 
 % Calculation of MSE for PCR
 [n p] = size(X);
-PCRmsep = sum(crossval(@pcrsse, X, y, 'KFold', 9), 1)/n;
+PCRmsep = sum(crossval(@pcrsse, X, y, 'KFold', 10), 1)/n;
 % Plotting MSE
 figure;
 title("Mean Squared Error");
 hold on
-a = plot(0:9, PCRmsep, 'b-o');
+a = plot(0:10, PCRmsep, 'b-o');
 b = plot(0:9, MSE1(1,:), 'r-o');
 c = plot(0:9, MSE1(2,:), 'k-o');
 xlabel("Number of Components");
 ylabel("Estimated Mean Squared Prediction Error");
 legend([a, b, c], {'PCR: MSE in X', 'PLS: MSE in X', 'PLS: MSE in y'})
 
+% Making predictions with PCR
+yfitPCR = [ones(size(X, 1), 1) X]*betaPCR;
 
+TSS = sum((y-mean(y)).^2);
+RSSPCR = sum((y - yfitPCR).^2);
+rsquaredPCR = 1 - RSSPCR/TSS;
 
 
 
