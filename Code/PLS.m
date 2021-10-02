@@ -18,16 +18,9 @@ plot(1:21, cumsum(100*PCTVAR(2,:)), '-bo');
 xlabel('Number of PLS component');
 ylabel('Percent Variance Explained in y');
 
-% plotting MSE
-figure;
-plot(0:21, MSE(2,:));
 
 
-
-
-
-
-% PLS modeling
+% PLS modeling using 9 components
 [XL1,yl1,XS1,YS1,beta1,PCTVAR1,MSE1,stats1] = plsregress(X, y, 9, 'cv', 10);
 
 plot(1:9, cumsum(100*PCTVAR1(2,:)), '-bo');
@@ -43,7 +36,7 @@ yfit1 = [ones(size(X,1),1) X]*beta1;
 
 TSS1 = sum((y-mean(y)).^2);
 RSS1 = sum((y-yfit1).^2);
-Rsquared1 = 1 - RSS/TSS;
+Rsquared1 = 1 - RSS1/TSS1;
 
 
 
