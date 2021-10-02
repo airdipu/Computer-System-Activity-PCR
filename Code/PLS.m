@@ -12,7 +12,7 @@ y = data(:, 22);                          % Usr data
 
 
 % PLS modeling
-[XL,yl,XS,YS,beta,PCTVAR,MSE,stats] = plsregress(X, y, 21, 'cv', 10);
+[XL,yl,XS,YS,beta,PCTVAR,MSE,stats0] = plsregress(X, y, 21, 'cv', 10);
 
 plot(1:21, cumsum(100*PCTVAR(2,:)), '-bo');
 xlabel('Number of PLS component');
@@ -81,11 +81,22 @@ TSS = sum((y-mean(y)).^2);
 RSSPCR = sum((y - yfitPCR).^2);
 rsquaredPCR = 1 - RSSPCR/TSS;
 
+% Comparing variable importance
+[varsPLS, idxPLS] = sort(abs(beta1), 'descend');
+[varsPCR, idxPCR] = sort(abs(betaPCR), 'descend');
 
 
 
+% Trying with 2 for PLS
+% Re-computing PLS with 2 PCs
+[XLoad, YLoad, XScore, YScore, betaPLS0, Var, MSE, stats] = plsregress(X, y, 2);
+% Making predictions with PLS
+yfitPLS0 = [ones(size(X, 1), 1) X]*betaPLS0;
+RSSPLS0 = sum((y - yfitPLS0).^2);
+rsquaredPLS0 = 1 - RSSPLS0/TSS;
 
 
+%
 
 
 
