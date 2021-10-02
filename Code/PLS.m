@@ -96,8 +96,12 @@ RSSPLS0 = sum((y - yfitPLS0).^2);
 rsquaredPLS0 = 1 - RSSPLS0/TSS;
 
 
-%
-
-
-
+% And PCR
+% Transform Beta PCs -> Beta Variables
+betaPCR0 = regress(y, PCAScores(:, 1:2));
+betaPCR0 = PCALoadings(:,1:2)*betaPCR0;
+betaPCR0 = [mean(y) - mean(X)*betaPCR0; betaPCR0];
+yfitPCR0 = [ones(size(X, 1), 1) X]*betaPCR0;
+RSSPCR0 = sum((y - yfitPCR0).^2);
+rsquaredPCR0 = 1 - RSSPCR0/TSS;
 
