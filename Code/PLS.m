@@ -60,6 +60,20 @@ ylabel('Explained Variance')
 legend([a, b, c], {'PCR: Explained Variance in X', 'PLS: Explained Variance in X', 'PLS: Explained Variance in y'});
 
 
+% Calculation of MSE for PCR
+[n p] = size(X);
+PCRmsep = sum(crossval(@pcrsse, X, y, 'KFold', 10), 1)/n;
+% Plotting MSE
+figure;
+title("Mean Squared Error");
+hold on
+a = plot(0:10, PCRmsep, 'b-o');
+b = plot(0:10, MSE1(1,:), 'r-o');
+c = plot(0:10, MSE1(2,:), 'k-o');
+xlabel("Number of Components");
+ylabel("Estimated Mean Squared Prediction Error");
+legend([a, b, c], {'PCR: MSE in X', 'PLS: MSE in X', 'PLS: MSE in y'})
+
 
 
 
